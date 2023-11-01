@@ -1,6 +1,6 @@
-
 package com.tienda.controller;
 
+import com.tienda.Service.CategoriaService;
 import com.tienda.Service.ProductoService;
 import com.tienda.domain.Producto;
 import com.tienda.service.impl.FirebaseStorageServiceImpl;
@@ -16,36 +16,45 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/producto")
 public class ProductoController {
+
     @Autowired
     /*
     Devuelve la lista de las productos
-    */ 
+     */
     private ProductoService productoService;
+
+    @Autowired
+    private CategoriaService categoriaService;
+
     @GetMapping("/listado")
-    public String listado(Model model){
-    model.addAttribute("atributo", "Hola :p");
-    var productos = productoService.getProductos(false);
-    model.addAttribute("productos",productos);
-    model.addAttribute("totalProductos",productos.size());
-    return "/producto/listado";
+    public String listado(Model model) {
+
+        var productos = productoService.getProductos(false);
+        model.addAttribute("productos", productos);
+        model.addAttribute("totalProductos", productos.size());
+
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias", categorias);
+        return "/producto/listado"; //Es una ubicacion en el servidor String
     }
-     @GetMapping("/nuevo")
+
+    @GetMapping("/nuevo")
     public String productoNuevo(Producto producto) {
         return "/producto/modifica";
     }
 
     @Autowired
     private FirebaseStorageServiceImpl firebaseStorageService;
-    
+
     @PostMapping("/guardar")
     public String productoGuardar(Producto producto,
-            @RequestParam("imagenFile") MultipartFile imagenFile) {        
+            @RequestParam("imagenFile") MultipartFile imagenFile) {
         if (!imagenFile.isEmpty()) {
             productoService.save(producto);
             producto.setRutaImagen(
                     firebaseStorageService.cargaImagen(
-                            imagenFile, 
-                            "producto", 
+                            imagenFile,
+                            "producto",
                             producto.getIdProducto()));
         }
         productoService.save(producto);
@@ -65,4 +74,3 @@ public class ProductoController {
         return "/producto/modifica";
     }
 }
-    

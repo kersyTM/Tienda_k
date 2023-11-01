@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import lombok.Data;
@@ -27,7 +29,7 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
     private Long idProducto;
-    private Long idCategoria;
+//    private Long idCategoria;
     private String descripcion;
     private String detalle;
     private double precio;
@@ -36,13 +38,10 @@ public class Producto implements Serializable {
     private boolean activo;
 
     
-    public Producto() {
-    }
-    
-    public Producto(String descripcion, boolean activo) {
-        this.descripcion = descripcion;
-        this.activo = activo;
-    }
+@ManyToOne
+@JoinColumn(name="id_Categoria")
+Categoria categoria;
+
 
     
     
