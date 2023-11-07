@@ -6,6 +6,23 @@
         <title>TechShop</title>
     </head>
     <body>
+        <section th:fragment="categoriasTabs" id="categorias">
+            <div class="row py-4">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" 
+                           aria-current="page" 
+                           href="/pruebas/listado"
+                           >[[#{pruebas.todas}]]</a>
+                    </li>
+                    <li th:each="categoria : ${categorias}" class="nav-item">
+                        <a class="nav-link" 
+                           th:href="@{/pruebas/listado/}+${categoria.idCategoria}"
+                           >[[${categoria.descripcion}]]</a>
+                    </li>                    
+                </ul>
+            </div>
+        </section>
         <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
         <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
             <div class="container">
@@ -41,8 +58,7 @@
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="descripcion">[[#{categoria.descripcion}]]</label>
-                                    <input type="text" class="form-control" name="descripcion" required="true"/>
-                                </div>
+                                    <textArea class="form-control" name="descripcion" rows="3"></textArea>                                </div>
                                 <div class="mb-3">
                                     <label for="activo">[[#{categoria.activo}]]</label>
                                     <input class="form-check-input" type="checkbox" name="activo" id="activo"/>

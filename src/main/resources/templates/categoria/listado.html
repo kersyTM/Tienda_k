@@ -9,11 +9,10 @@
     <body>
       <header th:replace = "~{layout/plantilla :: header}"/>
          [[${atributo}]]
-
+      <section th:replace ="~{pruebas/fragmentos :: categoriasTabs}"/>
       <section th:replace ="~{categoria/fragmentos :: botonesAgregar}"/>
       <section th:replace ="~{categoria/fragmentos :: agregarCategoria}"/>
       <section th:replace ="~{categoria/fragmentos :: listadoCategorias}"/>
-     
    
       
       <footer th:replace = "~{layout/plantilla :: footer}"/>
