@@ -3,6 +3,8 @@ package com.tienda.controller;
 import com.tienda.Service.CategoriaService;
 import com.tienda.Service.ProductoService;
 import com.tienda.domain.Categoria;
+import com.tienda.domain.Producto;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,5 +40,20 @@ public class PruebasController {
         model.addAttribute("totalProductos", productos.size());
         model.addAttribute("categorias", categorias);
         return "/pruebas/listado";
+    }
+    @GetMapping("/listado2")
+    public String listado2(Model model) {
+        var productos = productoService.getProductos(false);
+        model.addAttribute("productos", productos);
+        return "/pruebas/listado2";
+    }
+    
+        @PostMapping("/qwerty1")
+    public String consulta1(@RequestParam(value="precioInf") double precioInf,
+            @RequestParam(value="precioSup")double precioSup,
+            Model model) {
+        var productos = productoService.consultaQwerty(precioInf, precioSup);
+        model.addAttribute("productos", productos);
+        return "/pruebas/listado2";
     }
 }

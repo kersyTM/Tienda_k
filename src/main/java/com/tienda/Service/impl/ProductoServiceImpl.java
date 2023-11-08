@@ -34,13 +34,20 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
+    @Transactional
     public void delete(Producto producto) {
         productoDao.delete(producto);
     }
 
     @Override
+    @Transactional
     public void save(Producto producto) {
         productoDao.save(producto);
+    }
+    @Transactional(readOnly = true)
+    @Override
+    public List<Producto> consultaQwerty(double precioInf, double precioSup){
+        return productoDao.findByPrecioBetweenOrderByDescripcion(precioInf, precioSup);
     }
 
 }
