@@ -59,7 +59,7 @@
                                 <img th:src='@{${session.usuarioImagen}}'
                                      height="40"
                                      class='rounded-circle'/>
-                                <span sec:authorize='name'>Jhon</span>
+                                <span sec:authenticate='name'>Jhon</span>
                             </li>
                             <li class="nav-item my-auto">
                                 <form method="post" th:action="@{/logout}">
