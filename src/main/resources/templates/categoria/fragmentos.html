@@ -6,28 +6,11 @@
         <title>TechShop</title>
     </head>
     <body>
-        <section th:fragment="categoriasTabs" id="categorias">
-            <div class="row py-4">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" 
-                           aria-current="page" 
-                           href="/pruebas/listado"
-                           >[[#{pruebas.todas}]]</a>
-                    </li>
-                    <li th:each="categoria : ${categorias}" class="nav-item">
-                        <a class="nav-link" 
-                           th:href="@{/pruebas/listado/}+${categoria.idCategoria}"
-                           >[[${categoria.descripcion}]]</a>
-                    </li>                    
-                </ul>
-            </div>
-        </section>
         <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
         <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">   
+                    <div class="col-md-3" sec:authorize="hasRole('ROLE_ADMIN')">   
                         <button 
                             type="button" 
                             class="btn btn-primary btn-block" 
@@ -58,7 +41,8 @@
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="descripcion">[[#{categoria.descripcion}]]</label>
-                                    <textArea class="form-control" name="descripcion" rows="3"></textArea>                                </div>
+                                    <input type="text" class="form-control" name="descripcion" required="true"/>
+                                </div>
                                 <div class="mb-3">
                                     <label for="activo">[[#{categoria.activo}]]</label>
                                     <input class="form-check-input" type="checkbox" name="activo" id="activo"/>
@@ -93,14 +77,14 @@
                                         <tr><th>#</th>
                                             <th>[[#{categoria.descripcion}]]</th>
                                             <th>[[#{categoria.activo}]]</th>
-                                            <th></th></tr>
+                                            <th sec:authorize="hasRole('ROLE_ADMIN')"></th></tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="categoria, contador : ${categorias}">
                                             <td>[[${contador.count}]]</td>
                                             <td>[[${categoria.descripcion}]]</td>
                                             <td th:text="${categoria.activo} ? 'Activa' : 'Inactiva'" />
-                                            <td><a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
+                                            <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]</a>
                                                 <a th:href="@{/categoria/modificar/}+${categoria.idCategoria}"
