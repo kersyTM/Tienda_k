@@ -1,7 +1,7 @@
 package com.tienda.service.impl;
 
 import com.tienda.domain.Usuario;
-import com.tienda.Service.impl.CorreoService;
+import com.tienda.Service.CorreoService;
 import com.tienda.service.RegistroService;
 import com.tienda.service.UsuarioService;
 import jakarta.mail.MessagingException;
