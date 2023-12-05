@@ -12,4 +12,5 @@ public interface CorreoService {
             String asunto, 
             String contenidoHtml) 
             throws MessagingException;
+    
 }
