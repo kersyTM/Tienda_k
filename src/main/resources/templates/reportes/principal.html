@@ -17,56 +17,94 @@
                         [[#{reportes.usuarios}]]
                     </div>
                     <div class="card-body">
-                        <a th:href="@{/reportes/Usuario2?tipo=vPdf}"
+                        <a th:href="@{/reportes/usuarios?tipo=vPdf}"
                            class="btn btn-primary">
                             <i class="fas fa-eye"></i>
                             <i class="fas fa-file-pdf"></i>
                         </a>
-                        <a th:href="@{/reportes/Usuario2?tipo=Pdf}"
+                        <a th:href="@{/reportes/usuarios?tipo=Pdf}"
                            class="btn btn-success">
                             <i class="fas fa-download"></i>
                             <i class="fas fa-file-pdf"></i>
                         </a>
-                        <a th:href="@{/reportes/Usuario2?tipo=Xls}"
+                        <a th:href="@{/reportes/usuarios?tipo=Xls}"
                            class="btn btn-danger">
                             <i class="fas fa-download"></i>
                             <i class="fas fa-file-pdf"></i>
                         </a>
-                        <a th:href="@{/reportes/Usuario2?tipo=Csv}"
+                        <a th:href="@{/reportes/usuarios?tipo=Csv}"
                            class="btn btn-warming">
                             <i class="fas fa-download"></i>
                             <i class="fas fa-file-pdf"></i>
                         </a>
                     </div>
                 </div>
-                                <div class="card"> 
+                <div class="card"> 
                     <div class="card-header text-center">
                         [[#{reportes.ventas}]]
                     </div>
                     <div class="card-body">
-                        <a th:href="@{/reportes/Ventas?tipo=vPdf}"
+                        <a th:href="@{/reportes/ventas?tipo=vPdf}"
                            class="btn btn-primary">
                             <i class="fas fa-eye"></i>
                             <i class="fas fa-file-pdf"></i>
                         </a>
-                        <a th:href="@{/reportes/Ventas?tipo=Pdf}"
+                        <a th:href="@{/reportes/ventas?tipo=Pdf}"
                            class="btn btn-success">
                             <i class="fas fa-download"></i>
                             <i class="fas fa-file-pdf"></i>
                         </a>
-                        <a th:href="@{/reportes/Ventas?tipo=Xls}"
+                        <a th:href="@{/reportes/ventas?tipo=Xls}"
                            class="btn btn-danger">
                             <i class="fas fa-download"></i>
                             <i class="fas fa-file-pdf"></i>
                         </a>
-                        <a th:href="@{/reportes/Ventas?tipo=Csv}"
+                        <a th:href="@{/reportes/ventas?tipo=Csv}"
                            class="btn btn-warming">
                             <i class="fas fa-download"></i>
                             <i class="fas fa-file-pdf"></i>
                         </a>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-header text-center">
+                        [[#{reportes.totales}]]
+                    </div>
+                    <div class="card-body">
+                        <form method="get" th:action="@{/reportes/ventasTotales}" class="was-validated">
+                            <div class="mb-3">
+                                <label for="fechaIni"> [[#{fecha.ini}]]</label>
+                                <input type="date" class="form-control" id="fechaIni" name="fechaIni" th:value="${fechaInicio}" required="true"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fechaFin"> [[#{fecha.fin}]]</label>
+                                <input type="date" class="form-control" id="fechaFin" name="fechaFin" th:value="${fechaFin}" required="true"/>
+                            </div>
+                            <!-- Complete the closing tag for the first date input -->
+                    </div>
+                    <div class="row">
+                        <button name="tipo" value="vPdf" class="btn btn-primary">
+                            <i class="fas fa-eye"></i>
+                            <i class="fas fa-file-pdf"></i>
+                        </button>
+                        <button name="tipo" value="Pdf" class="btn btn-success">
+                            <i class="fas fa-download"></i>
+                            <i class="fas fa-file-pdf"></i>
+                        </button>
+                        <button name="tipo" value="Xls" class="btn btn-danger">
+                            <i class="fas fa-download"></i>
+                            <i class="fas fa-file-pdf"></i>
+                        </button>
+                        <button name="tipo" value="Csv" class="btn btn-warning">
+                            <i class="fas fa-download"></i>
+                            <i class="fas fa-file-pdf"></i>
+                        </button>
+                    </div>
+                    </form>
+                </div>
             </div>
+
+
         </div>
 
         <footer th:replace = "~{layout/plantilla :: footer}"/>

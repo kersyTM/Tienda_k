@@ -46,7 +46,7 @@ public class ReporteServiceImpl implements ReporteService {
                     = tipo.equalsIgnoreCase("vPdf") ? "inline; " : "attachment;";
 
             //se establece el path del archivo de reporte
-            String reportePath = "reportes;";
+            String reportePath = "reportes";
 
             //la salida del reporte
             ByteArrayOutputStream salida = new ByteArrayOutputStream();
